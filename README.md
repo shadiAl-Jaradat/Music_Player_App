@@ -21,5 +21,14 @@ and I used `GetMaterialApp` to use `getPages` as a routing system to navigate be
 
 ## Screenshots
 1. Home Screen
+
+![HomeScreenShot](https://github.com/shadiAl-Jaradat/Music_Player_App/assets/94618324/5f97052b-8ca7-45a5-bea6-3a64d66fc5e4)
+
+
 2. Now Playing Screen
+
+![iPhone 14 Pro Mockup Light](https://github.com/shadiAl-Jaradat/Music_Player_App/assets/94618324/2fc9cb32-da0a-4370-88fa-e730ba2b6d2e)
+
 3. animated Bottom Navigation Bar
+
+![AnimatedNavigationBar2](https://github.com/shadiAl-Jaradat/Music_Player_App/assets/94618324/ea074522-b93f-4963-a2a6-63d87a456f37)
