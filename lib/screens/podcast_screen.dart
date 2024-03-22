@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PodcastScreen extends StatefulWidget {
   const PodcastScreen({super.key});
@@ -10,6 +11,14 @@ class PodcastScreen extends StatefulWidget {
 class _PodcastScreenState extends State<PodcastScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Text("Podcast Screen ...", style: TextStyle(color: Colors.white),);
+    return Center(
+      child: Text(
+        "Podcast Screen\nComing Soon",
+        style: GoogleFonts.poppins(
+          color: Colors.white,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }

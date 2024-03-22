@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:music_player_app/core/controllers.dart';
+import 'package:music_player_app/models/song.dart';
+import 'package:music_player_app/screens/home_screen.dart';
 
 class NowPLayingScreen extends StatefulWidget {
   const NowPLayingScreen({super.key});
@@ -16,13 +18,13 @@ class NowPLayingScreen extends StatefulWidget {
 class _NowPLayingScreenState extends State<NowPLayingScreen> {
   @override
   Widget build(BuildContext context) {
-    final AudioPLayerController audioPLayerController = Get.find();
+    final AudioPlayerController audioPLayerController = Get.find();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,
           image: DecorationImage(
-            image: NetworkImage(audioPLayerController.song?.value.imageUrl ?? ''),
+            image: NetworkImage(audioPLayerController.song.value?.imageUrl ?? ''),
             fit: BoxFit.cover,
           ),
         ),
@@ -47,7 +49,9 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Get.back();
+                          Get.back(
+                            result: 's'
+                          );
                         },
                         icon: const Icon(
                           Icons.arrow_back_ios,
@@ -97,7 +101,7 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(500),
                               image: DecorationImage(
-                                image: NetworkImage(audioPLayerController.song?.value.imageUrl ?? ''),
+                                image: NetworkImage(audioPLayerController.song.value?.imageUrl ?? ''),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -154,7 +158,7 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                             child: ElevatedButton(
                               onPressed: () {},
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(const Color(0xFFf65291)),
+                                backgroundColor: MaterialStateProperty.all(MyColors.secondaryColor),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
@@ -186,7 +190,7 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                         height: 60,
                       ),
                       Text(
-                        audioPLayerController.song?.value.name ?? '',
+                        audioPLayerController.song.value?.name ?? '',
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontSize: 16,
@@ -195,7 +199,7 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        audioPLayerController.song?.value.artist ?? '',
+                        audioPLayerController.song.value?.artist ?? '',
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontSize: 16,
@@ -236,7 +240,7 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                                   },
                                   inactiveColor: Colors.white.withOpacity(0.3),
                                   thumbColor: Colors.white,
-                                  activeColor: const Color(0xFFf65291),
+                                  activeColor: MyColors.secondaryColor,
                                   overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0.4)),
                                 ),
                               ),
@@ -257,7 +261,25 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (audioPLayerController.inSearchMode.value) {
+                                if (audioPLayerController.currentIndex.value != 0) {
+                                  audioPLayerController.setCurrentIndex(audioPLayerController.currentIndex.value - 1);
+                                  Song newSong = audioPLayerController.searchedSongs[audioPLayerController.currentIndex.value];
+                                  audioPLayerController.setSong(newSong);
+                                  await audioPLayerController.play();
+                                  setState(() {});
+                                }
+                              } else {
+                                if (audioPLayerController.currentIndex.value != 0) {
+                                  audioPLayerController.setCurrentIndex(audioPLayerController.currentIndex.value - 1);
+                                  Song newSong = audioPLayerController.listOfSongs[audioPLayerController.currentIndex.value];
+                                  audioPLayerController.setSong(newSong);
+                                  await audioPLayerController.play();
+                                  setState(() {});
+                                }
+                              }
+                            },
                             icon: const Icon(
                               Icons.skip_previous,
                               color: Colors.white,
@@ -297,7 +319,26 @@ class _NowPLayingScreenState extends State<NowPLayingScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (audioPLayerController.inSearchMode.value) {
+                                if (audioPLayerController.currentIndex.value != audioPLayerController.searchedSongs.length - 1) {
+                                  audioPLayerController.setCurrentIndex(audioPLayerController.currentIndex.value + 1);
+
+                                  Song newSong = audioPLayerController.searchedSongs[audioPLayerController.currentIndex.value];
+                                  audioPLayerController.setSong(newSong);
+                                  await audioPLayerController.play();
+                                  setState(() {});
+                                }
+                              } else {
+                                if (audioPLayerController.currentIndex.value != audioPLayerController.listOfSongs.length - 1) {
+                                  audioPLayerController.setCurrentIndex(audioPLayerController.currentIndex.value + 1);
+                                  Song newSong = audioPLayerController.listOfSongs[audioPLayerController.currentIndex.value];
+                                  audioPLayerController.setSong(newSong);
+                                  await audioPLayerController.play();
+                                  setState(() {});
+                                }
+                              }
+                            },
                             icon: const Icon(
                               Icons.skip_next,
                               color: Colors.white,

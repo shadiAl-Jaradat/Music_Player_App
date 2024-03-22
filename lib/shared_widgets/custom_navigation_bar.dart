@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_app/screens/home_screen.dart';
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({Key? key, required this.onTabChange}) : super(key: key);
@@ -96,10 +97,10 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
                               onTabPress(index);
                             },
                       child: index == 2
-                          ? const CircleAvatar(
+                          ? CircleAvatar(
                               radius: 30,
-                              backgroundColor: Color(0xFFf65291),
-                              child: Icon(
+                              backgroundColor: MyColors.secondaryColor,
+                              child: const Icon(
                                 Icons.headphones,
                                 color: Colors.white,
                                 size: 24,
@@ -127,7 +128,7 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
                           height: 4,
                           width: _widthAnimation.value,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFf65291),
+                            color: MyColors.secondaryColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

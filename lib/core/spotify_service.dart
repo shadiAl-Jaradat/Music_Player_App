@@ -16,7 +16,6 @@ class SpotifyService {
       data: 'grant_type=client_credentials',
       options: Options(headers: {'Authorization': 'Basic $credentials', 'Content-Type': 'application/x-www-form-urlencoded'}),
     );
-    print(response.data['access_token']);
     return response.data['access_token'];
   }
 
@@ -52,7 +51,7 @@ class SpotifyService {
     return recommendations;
   }
 
-  Future<List<dynamic>> searchMusic(String query) async {
+  Future<List<Song>> searchMusic(String query) async {
     String accessToken = await _getAccessToken();
     var response = await dio.get(
       'https://api.spotify.com/v1/search',
@@ -60,7 +59,32 @@ class SpotifyService {
       options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
     );
 
-    return response.data['tracks']['items'];
+    List<Song> recommendations = [];
+
+    if(response.data['tracks'] == null) return recommendations;
+
+    Map<String,dynamic> tracksMap = response.data['tracks'];
+    List<dynamic> tracks = tracksMap['items'];
+
+
+    for(var track in tracks){
+      final previewUrl = track['preview_url'];
+      if(previewUrl != null) {
+        recommendations.add(
+            Song(
+                name: track['name'],
+                songUrl: track['preview_url'],
+                imageUrl: track['album']['images'][0]['url'],
+                duration: track['duration_ms'],
+                artist: track['artists'][0]['name'] ?? '-'
+            )
+        );
+      }
+    }
+
+    return recommendations;
+
+
   }
 
   Future<List<dynamic>> getMusicForCategory(String category) async {
