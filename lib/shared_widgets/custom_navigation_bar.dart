@@ -17,7 +17,7 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
     Icons.search_sharp,
     Icons.headphones,
     Icons.podcasts_sharp,
-    Icons.settings_rounded,
+    Icons.favorite_border_rounded,
   ];
   int _selectedTab = 0;
   late AnimationController _positionController;

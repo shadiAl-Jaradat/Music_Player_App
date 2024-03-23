@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(
               child: Text(
                 snapshot.error.toString(),
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: MyColors.tertiaryColor),
               ),
             );
           }
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.12),
+                                    color: MyColors.tertiaryColor.withOpacity(0.12),
                                   ),
                                   child: ListTile(
                                     leading: Transform.translate(
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Obx(
                                               () => Icon(
                                                 audioPlayerController.isPlaying.value ? Icons.pause : Icons.play_arrow,
-                                                color: Colors.white,
+                                                color: MyColors.tertiaryColor,
                                                 size: 38,
                                               ),
                                             ),
@@ -151,16 +151,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Icons.skip_next,
                                                       color: audioPlayerController.currentIndex.value !=
                                                               audioPlayerController.searchedSongs.length - 1
-                                                          ? Colors.white
-                                                          : Colors.white.withOpacity(0.4),
+                                                          ? MyColors.tertiaryColor
+                                                          : MyColors.tertiaryColor.withOpacity(0.4),
                                                       size: 38,
                                                     )
                                                   : Icon(
                                                       Icons.skip_next,
                                                       color: audioPlayerController.currentIndex.value !=
                                                               audioPlayerController.listOfSongs.length - 1
-                                                          ? Colors.white
-                                                          : Colors.white.withOpacity(0.4),
+                                                          ? MyColors.tertiaryColor
+                                                          : MyColors.tertiaryColor.withOpacity(0.4),
                                                       size: 38,
                                                     ),
                                             ),
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     title: Text(
                                       audioPlayerController.song.value?.name ?? '',
                                       style: GoogleFonts.poppins(
-                                        color: Colors.white,
+                                        color: MyColors.tertiaryColor,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -198,9 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           }
-          return const Center(
+          return Center(
             child: CircularProgressIndicator(
-              color: Colors.white,
+              color: MyColors.tertiaryColor,
             ),
           );
         });
@@ -221,6 +221,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class MyColors {
   static Color get primaryColor => const Color(0xFF222932);
-  static Color get secondaryColor => const Color(0xFFf65291);
+  // suggestion 1
+  // static Color get secondaryColor => const Color(0xFFf65291);
+
+  // suggestion 2
+  // static Color get secondaryColor => const Color(0xFF8E3B46);
+
+  // suggestion 3
   // static Color get secondaryColor => const Color(0xFFA197E4);
+  // static Color get tertiaryColor => const Color(0xFFB7E3CC);
+
+  // suggestion 4
+  // static Color get secondaryColor => const Color(0xFF8DAA9D);
+  // static Color get secondaryColor => const Color(0xFF4BB285);
+  // static Color get tertiaryColor => const Color(0xFFFBF5F3);
+
+  // suggestion 5
+  static Color get secondaryColor => const Color(0xFFFFAD05);
+  static Color get tertiaryColor => const Color(0xFFFBF5F3);
+
 }

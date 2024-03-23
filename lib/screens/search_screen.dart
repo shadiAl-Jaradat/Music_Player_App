@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:music_player_app/core/controllers.dart';
 import 'package:music_player_app/core/spotify_service.dart';
 import 'package:music_player_app/models/song.dart';
+import 'package:music_player_app/screens/home_screen.dart';
 import 'package:music_player_app/shared_widgets/song_item_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final AudioPlayerController audioPLayerController = Get.find();
   final SpotifyService spotifyService = SpotifyService(Dio());
   bool isSearching = false;
+  bool noResults = false;
   TextEditingController searchController = TextEditingController();
 
   void getSongs(String value) async {
@@ -29,6 +32,11 @@ class _SearchScreenState extends State<SearchScreen> {
     List<Song> result = await spotifyService.searchMusic(value);
     audioPLayerController.setSearchedSongs(result);
     setState(() {
+      if (result.isEmpty) {
+        noResults = true;
+      } else {
+        noResults = false;
+      }
       isSearching = false;
     });
   }
@@ -37,7 +45,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Obx(
       () => ListView.builder(
-        itemCount: (searchController.value.text.trim().isEmpty || isSearching) ? (audioPLayerController.searchedSongs.length - audioPLayerController.searchedSongs.length + 2) : audioPLayerController.searchedSongs.length + 1,
+        itemCount: (searchController.value.text.isEmpty || noResults || isSearching)
+            ? (audioPLayerController.searchedSongs.length - audioPLayerController.searchedSongs.length + 2)
+            : audioPLayerController.searchedSongs.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
             return Padding(
@@ -49,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   Text(
                     'Search your song',
                     style: GoogleFonts.poppins(
-                      color: Colors.white,
+                      color: MyColors.tertiaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -63,7 +73,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         audioPLayerController.setSearchedSongs([]);
                         audioPLayerController.stop();
                         audioPLayerController.setSong(null);
-                        setState(() {});
+                        setState(() {
+                          noResults = false;
+                        });
                       } else {
                         if (!isSearching) {
                           getSongs(value.trim());
@@ -71,31 +83,31 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                     },
                     style: GoogleFonts.poppins(
-                      color: Colors.white,
+                      color: MyColors.tertiaryColor,
                     ),
-                    cursorColor: Colors.white,
+                    cursorColor: MyColors.tertiaryColor,
                     decoration: InputDecoration(
                       hintText: 'Search',
                       hintStyle: GoogleFonts.poppins(
-                        color: Colors.white.withOpacity(0.5),
+                        color: MyColors.tertiaryColor.withOpacity(0.5),
                       ),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.white,
+                        color: MyColors.tertiaryColor,
                       ),
-                      border: const UnderlineInputBorder(
+                      border: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.white,
+                          color: MyColors.tertiaryColor,
                         ),
                       ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.2),
+                          color: MyColors.tertiaryColor.withOpacity(0.2),
                         ),
                       ),
-                      focusedBorder: const UnderlineInputBorder(
+                      focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.white,
+                          color: MyColors.tertiaryColor,
                         ),
                       ),
                     ),
@@ -107,28 +119,44 @@ class _SearchScreenState extends State<SearchScreen> {
           if (isSearching) {
             return Container(
               padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
-              child: const Center(
+              child: Center(
                 child: CircularProgressIndicator(
-                  color: Colors.white,
+                  color: MyColors.tertiaryColor,
                 ),
               ),
             );
           }
 
-          if (searchController.value.text.trim().isEmpty) {
+          if (noResults) {
             return Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
               child: Center(
-                child: Text(
-                  'No songs found',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white.withOpacity(0.5),
-                    fontSize: 20,
-                  ),
-                  textAlign: TextAlign.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/noRes.json',
+                      height: 150,
+                      width: 150,
+                      repeat: true
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'No songs found',
+                      style: GoogleFonts.poppins(
+                        color: MyColors.tertiaryColor.withOpacity(0.5),
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    )
+                  ],
                 ),
               ),
             );
+          }
+
+          if(searchController.value.text.isEmpty){
+            return const SizedBox();
           }
 
           return SongItemCard(

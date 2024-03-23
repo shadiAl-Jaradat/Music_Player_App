@@ -58,16 +58,16 @@ class _SongItemCardState extends State<SongItemCard> {
                         ? Obx(
                           () =>  CircleAvatar(
                               radius: 20,
-                              backgroundColor: audioPLayerController.isPlaying.value ?  MyColors.secondaryColor : Colors.white,
+                              backgroundColor: audioPLayerController.isPlaying.value ?  MyColors.secondaryColor : MyColors.tertiaryColor,
                               child: Icon(
                                 (audioPLayerController.isPlaying.value) ? Icons.pause : Icons.play_arrow,
-                                color: (audioPLayerController.isPlaying.value) ? Colors.white : MyColors.secondaryColor,
+                                color: (audioPLayerController.isPlaying.value) ? MyColors.tertiaryColor : MyColors.secondaryColor,
                               )
                             ),
                         )
                         : CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.white,
+                            backgroundColor: MyColors.tertiaryColor,
                             child: Icon(
                               Icons.play_arrow,
                               color: MyColors.secondaryColor,
@@ -75,7 +75,7 @@ class _SongItemCardState extends State<SongItemCard> {
                 title: Text(
                   widget.song.name,
                   style: GoogleFonts.poppins(
-                    color: Colors.white,
+                    color: MyColors.tertiaryColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -83,10 +83,10 @@ class _SongItemCardState extends State<SongItemCard> {
                   maxLines: 1,
                 ),
                 // subtitle: Text(widget.song.artist),
-                subtitle: Text(widget.song.artist, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w300)),
+                subtitle: Text(widget.song.artist, style: GoogleFonts.poppins(color: MyColors.tertiaryColor, fontWeight: FontWeight.w300)),
                 trailing: Text(
                     formatDuration(widget.song.duration),
-                    style: GoogleFonts.poppins(color: Colors.white, letterSpacing: 1.3)
+                    style: GoogleFonts.poppins(color: MyColors.tertiaryColor, letterSpacing: 1.3)
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:music_player_app/core/controllers.dart';
+import 'package:music_player_app/screens/home_screen.dart';
 import 'package:music_player_app/shared_widgets/song_item_card.dart';
 
 class AllSongsScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AllSongsScreenState extends State<AllSongsScreen> {
                   Text(
                     'All Songs',
                     style: GoogleFonts.poppins(
-                      color: Colors.white,
+                      color: MyColors.tertiaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -40,7 +41,7 @@ class _AllSongsScreenState extends State<AllSongsScreen> {
                   Text(
                     audioPLayerController.listOfSongs.length.toString(),
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0),
+                      color: MyColors.tertiaryColor.withOpacity(0),
                       fontSize: 16,
                     ),
                   )

@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "archive",
+      "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/archive-3.4.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/args-2.4.2",
       "packageUri": "lib/",
@@ -76,6 +82,12 @@
     {
       "name": "collection",
       "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/collection-1.18.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "convert",
+      "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -200,6 +212,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "lottie",
+      "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/lottie-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
@@ -280,6 +298,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "pointycastle",
+      "rootUri": "file:///Users/shadijaradadt/.pub-cache/hosted/pub.dev/pointycastle-3.7.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -410,7 +434,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-03-22T18:51:50.675268Z",
+  "generated": "2024-03-23T19:11:16.383295Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }
